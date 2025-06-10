@@ -5,14 +5,12 @@ categories:
   - title: '🚀 Feature'
     labels:
       - 'feature'
-    change-template: |
-      - $BODY
+    change-template: '$BODY'
 
   - title: '🐛 Bug Fixes'
     labels:
       - 'fix'
-    change-template: |
-      - $BODY
+    change-template: '$BODY'
 
   - title: '🔒 Dependencies'
     labels:
@@ -26,8 +24,7 @@ categories:
       - 'feature'
       - 'fix'
       - 'dependencies'
-    change-template: |
-      - $BODY
+    change-template: '$BODY'
 
 no-changes-template: '- No user-facing changes in this release.'
 
