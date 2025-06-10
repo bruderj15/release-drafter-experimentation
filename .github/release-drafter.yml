@@ -17,6 +17,7 @@ categories:
   - title: '🔒 Dependencies'
     labels:
       - 'dependencies'
+    change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 
   - title: '📦 What’s Changed?'
     labels:
@@ -28,7 +29,6 @@ categories:
     change-template: |
       - $BODY
 
-change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 no-changes-template: '- No user-facing changes in this release.'
 
 template: |
