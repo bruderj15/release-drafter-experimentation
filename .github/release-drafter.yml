@@ -24,3 +24,10 @@ categories:
 
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 no-changes-template: '- No user-facing changes in this release.'
+
+template: |
+  ## 📦 Release Notes
+
+  $CHANGES
+
+  **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...$TAG
