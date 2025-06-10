@@ -1,0 +1,26 @@
+name-template: 'v$NEXT_PATCH_VERSION'
+tag-template: 'v$NEXT_PATCH_VERSION'
+
+categories:
+  - title: '🚀 Feature'
+    labels: ['feature']
+
+  - title: '🐛 Bug Fixes'
+    labels: ['fix']
+
+  - title: '🔒 Dependencies'
+    labels: ['dependencies']
+
+  - title: '📦 What’s Changed?'
+    labels: ['*']
+    exclude-labels: ['feature', 'fix', 'dependencies']
+
+change-template: |
+  $CONTRIBUTOR_NOTE
+
+template: |
+  ## 📦 Release Notes
+
+  $CHANGES
+
+  **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...$TAG
