@@ -16,7 +16,6 @@ categories:
 
 change-template: |
   - $TITLE @$AUTHOR (#$NUMBER)
-  
     <ul style="margin-left: 20px">
     $BODY
     </ul>
