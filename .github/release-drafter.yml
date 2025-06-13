@@ -21,6 +21,10 @@ change-template: |
 
 no-changes-template: '- No user-facing changes in this release.'
 
+replacers:
+  - search: '(^|\n)'
+    replace: '$1    '  # 4 spaces to indent every line of body
+
 template: |
   ## 📦 Release Notes
 
