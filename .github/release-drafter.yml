@@ -14,11 +14,11 @@ categories:
     labels:
       - 'dependencies'
 
-change-template:
-  '- $TITLE @$AUTHOR (#$NUMBER)
+change-template: |
+  - $TITLE @$AUTHOR (#$NUMBER)
   
-  &nbsp;&nbsp$BODY
-  '
+  $BODY
+
 no-changes-template: '- No user-facing changes in this release.'
 
 template: |
