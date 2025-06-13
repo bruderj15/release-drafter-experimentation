@@ -17,7 +17,9 @@ categories:
 change-template: |
   - $TITLE @$AUTHOR (#$NUMBER)
   
-    > $BODY
+    <div style="margin-left: 20px">
+      $BODY
+    </div>
 
 no-changes-template: '- No user-facing changes in this release.'
 
