@@ -2,10 +2,9 @@ name-template: 'v$NEXT_PATCH_VERSION 🌟'
 tag-template: 'v$NEXT_PATCH_VERSION'
 
 categories:
-  - title: '🚀 Feature'
+  - title: '🚀 Features'
     labels:
       - 'feature'
-    category-template: 'Woop boop category template'
 
   - title: '🐛 Bug Fixes'
     labels:
@@ -15,15 +14,8 @@ categories:
     labels:
       - 'dependencies'
 
-  - title: '📦 What’s Changed?'
-    labels:
-      - '*'
-    exclude-labels:
-      - 'feature'
-      - 'fix'
-      - 'dependencies'
-
-#change-template: '- $TITLE @$AUTHOR (#$NUMBER) with body $BODY'
+change-template: '- $TITLE @$AUTHOR (#$NUMBER) 
+$BODY'
 no-changes-template: '- No user-facing changes in this release.'
 
 template: |
