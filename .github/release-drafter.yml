@@ -14,8 +14,7 @@ categories:
     labels:
       - 'dependencies'
 
-change-template: '- $TITLE @$AUTHOR (#$NUMBER) 
-$BODY'
+change-template: '- $TITLE @$AUTHOR (#$NUMBER) \n $BODY'
 no-changes-template: '- No user-facing changes in this release.'
 
 template: |
