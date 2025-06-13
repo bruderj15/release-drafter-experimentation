@@ -5,6 +5,7 @@ categories:
   - title: '🚀 Feature'
     labels:
       - 'feature'
+    category-template: 'Woop boop category template'
 
   - title: '🐛 Bug Fixes'
     labels:
@@ -22,7 +23,7 @@ categories:
       - 'fix'
       - 'dependencies'
 
-change-template: '- $TITLE @$AUTHOR (#$NUMBER) with body $BODY'
+#change-template: '- $TITLE @$AUTHOR (#$NUMBER) with body $BODY'
 no-changes-template: '- No user-facing changes in this release.'
 
 template: |
