@@ -21,8 +21,8 @@ change-template: |
 no-changes-template: '- No user-facing changes in this release.'
 
 replacers:
-  - search: '(?s).*?(<ul style="margin-left: 20px">.*?</ul>)'
-    replace: '$1'
+  - search: 'Checklist'
+    replace: 'Franz Liszt'
 
 template: |
   ## 📦 Release Notes
