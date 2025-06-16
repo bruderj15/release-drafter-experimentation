@@ -22,8 +22,31 @@ no-changes-template: '- No user-facing changes in this release.'
 
 replacers:
   - search: '- [ ] The corresponding ticket is in state `In Review`'
-    replace: 'BOOP'
-
+    replace: ''
+  - search: '- [x] The corresponding ticket is in state `In Review`'
+    replace: ''
+  - search: '- [ ] The corresponding ticket is attached to this Pull-Request'
+    replace: ''
+  - search: '- [x] The corresponding ticket is attached to this Pull-Request'
+    replace: ''
+  - search: |
+      - [ ] The commit-message-format `Closes #ISSUE_ID - PROBLEM/SOLUTION` 
+        - is present as single-commit already or
+        - will be squashed on merge
+    replace: ''
+  - search: |
+      - [x] The commit-message-format `Closes #ISSUE_ID - PROBLEM/SOLUTION` 
+        - is present as single-commit already or
+        - will be squashed on merge
+    replace: ''
+  - search: '- [ ] If the documentation needs an update, following there is a link to it:'
+    replace: ''
+  - search: '- [x] If the documentation needs an update, following there is a link to it:'
+    replace: ''
+  - search: '## Definition of Done'
+    replace: ''
+  - search: '## Custom Release-Notes'
+    replace: ''
 template: |
   ## 📦 Release Notes
 
