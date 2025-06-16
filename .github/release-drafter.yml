@@ -21,8 +21,8 @@ change-template: |
 no-changes-template: '- No user-facing changes in this release.'
 
 replacers:
-  - search: '(?s)## Custom Release-Notes\s*<ul style="margin-left: 20px">(.*?)</ul>'
-    replace: '<ul style="margin-left: 20px">BOOP</ul>'
+  - search: '(?s).*?(<ul style="margin-left: 20px">.*?</ul>).*'
+    replace: '$1'
 
 template: |
   ## 📦 Release Notes
