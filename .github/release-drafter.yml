@@ -21,8 +21,8 @@ change-template: |
 no-changes-template: '- No user-facing changes in this release.'
 
 replacers:
-  - search: 'Checklist'
-    replace: 'Franz Liszt'
+  - search: '(?s)### Custom Release-Notes\s*<ul style="margin-left: 20px">(.*?)</ul>'
+    replace: '<ul style="margin-left: 20px">$1</ul>'
 
 template: |
   ## 📦 Release Notes
