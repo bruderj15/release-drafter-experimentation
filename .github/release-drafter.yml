@@ -29,15 +29,13 @@ replacers:
     replace: ''
   - search: '- [x] The corresponding ticket is attached to this Pull-Request'
     replace: ''
-  - search: |
-      - [ ] The commit-message-format `Closes #ISSUE_ID - PROBLEM/SOLUTION` 
+  - search: '- [ ] The commit-message-format `Closes #ISSUE_ID - PROBLEM/SOLUTION` 
         - is present as single-commit already or
-        - will be squashed on merge
+        - will be squashed on merge'
     replace: ''
-  - search: |
-      - [x] The commit-message-format `Closes #ISSUE_ID - PROBLEM/SOLUTION` 
-        - is present as single-commit already or
-        - will be squashed on merge
+  - search: '- [x] The commit-message-format `Closes #ISSUE_ID - PROBLEM/SOLUTION` 
+          - is present as single-commit already or
+          - will be squashed on merge'
     replace: ''
   - search: '- [ ] If the documentation needs an update, following there is a link to it:'
     replace: ''
