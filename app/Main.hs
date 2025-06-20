@@ -4,13 +4,14 @@
 module Main where
 
 import Prelude hiding (putStrLn, getContents)
-import Data.Text (Text)
-import Data.Text.IO (getContents)
+import Data.Text (Text, intercalate, replicate)
+import Data.Text.IO (getContents, putStrLn)
 import Data.Attoparsec.Text
 import Data.Sequence hiding ((|>), (<|))
 import Control.Lens hiding (children, Empty)
 import Control.Monad (join)
 import Control.Applicative ((<|>))
+import GHC.IsList (toList)
 
 type Indentation = Int
 
@@ -34,13 +35,6 @@ data Release = Release
   , _footer     :: Text
   } deriving (Show, Eq)
 $(makeLenses ''Release)
-
-main :: IO ()
-main = do
-  input <- getContents
-  case parseOnly parseRelease input of
-    Left err -> print err
-    Right res -> print res
 
 parseRelease :: Parser Release
 parseRelease = do
@@ -87,3 +81,25 @@ parseReleaseNote = do
   title <- takeTill isEndOfLine
   _ <- endOfLine
   return $ ReleaseNote { _note = title, _indentation = indent }
+
+formatRelease :: Release -> Text
+formatRelease r =
+  let cats = formatCategory <$> r^.categories
+      renderedCats = intercalate "\n\n\n" $ GHC.IsList.toList cats
+   in renderedCats <> "\n\n" <> r^.footer
+
+formatCategory :: ReleaseCategory -> Text
+formatCategory cat =
+  let notes = formatReleaseNote <$> cat^.categoryReleaseNotes
+      renderedNotes = intercalate "\n" $ GHC.IsList.toList notes
+   in cat^.categoryTitle <> "\n\n" <> renderedNotes
+
+formatReleaseNote :: ReleaseNote -> Text
+formatReleaseNote rn = Data.Text.replicate (rn^.indentation) " " <> "- " <> rn^.note
+
+main :: IO ()
+main = do
+  input <- getContents
+  case parseOnly parseRelease input of
+    Left err -> print err
+    Right res -> putStrLn $ formatRelease res
