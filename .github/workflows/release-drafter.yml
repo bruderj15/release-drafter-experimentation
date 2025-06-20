@@ -44,6 +44,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   postprocess:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     needs: update_release_draft
     runs-on: ubuntu-latest
 
