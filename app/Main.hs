@@ -109,5 +109,5 @@ main :: IO ()
 main = do
   input <- getContents
   case parseOnly parseRelease input of
-    Left err -> print err
+    Left _ -> putStrLn input
     Right res -> putStrLn $ formatRelease res

@@ -20,7 +20,6 @@ executable release-notes-postprocessor
   build-depends:
     base ^>=4.20.0.0
     , attoparsec ^>=0.14.4
-    , bytestring ^>=0.12 && <0.13
     , text
     , containers
     , lens

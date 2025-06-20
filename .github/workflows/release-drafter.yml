@@ -1,6 +1,7 @@
 name: Release Drafter
 
 on:
+  workflow_dispatch:
   push:
     # branches to consider in the event; optional, defaults to all
     branches:
@@ -76,9 +77,13 @@ jobs:
           script: |
             const fs = require('fs');
             const newBody = fs.readFileSync('processed.md', 'utf8');
+            const release_id = core.getInput('release_id') || process.env.RELEASE_ID;
+
             await github.rest.repos.updateRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              release_id: context.payload.release.id,
+              release_id: Number(release_id),
               body: newBody
             });
+        env:
+          RELEASE_ID: ${{ steps.fetch_release.outputs.release_id }}
