@@ -47,7 +47,7 @@ parseCategories = fromList <$> many' parseCategory
 
 parseCategory :: Parser ReleaseCategory
 parseCategory = do
-  _ <- skipSpace >> string "##" >> skipSpace
+  _ <- skipSpace >> "##" >> skipSpace
   catTitle <- takeTill isEndOfLine
   _ <- skipSpace
   rns <- fmap (join . fromList) $ many' $ do
@@ -64,20 +64,20 @@ parsePullRequestBody = parsePullRequestBodyTemplate <|> parsePullRequestBodyDepe
 
 parsePullRequestBodyTemplate :: Parser (Seq ReleaseNote)
 parsePullRequestBodyTemplate = do
-  _ <- anyChar `manyTill` (skipSpace >> string "## Custom Release-Notes")
+  _ <- anyChar `manyTill` (skipSpace >> "## Custom Release-Notes")
   _ <- skipSpace
-  fromList <$> manyTill parseReleaseNote (skipSpace >> string "<!-- end-of-pr-marker -->")
+  fromList <$> manyTill parseReleaseNote (skipSpace >> "<!-- end-of-pr-marker -->")
 
 parsePullRequestBodyDependabot :: Parser (Seq ReleaseNote)
 parsePullRequestBodyDependabot = do
-  _ <- anyChar `manyTill` (skipSpace >> string "`@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)")
-  _ <- skipSpace >> string "</details>" >> skipSpace
+  _ <- anyChar `manyTill` (skipSpace >> "`@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)")
+  _ <- skipSpace >> "</details>" >> skipSpace
   return mempty
 
 parseReleaseNote :: Parser ReleaseNote
 parseReleaseNote = do
   indent <- Prelude.length <$> many' space
-  _ <- string "- "
+  _ <- "- "
   title <- takeTill isEndOfLine
   _ <- endOfLine
   return $ ReleaseNote { _note = title, _indentation = indent }
