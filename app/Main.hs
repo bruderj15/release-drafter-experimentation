@@ -12,6 +12,7 @@ import Data.Attoparsec.Text
 import Data.Sequence hiding ((|>), (<|))
 import Control.Lens hiding (children, Empty)
 import Control.Monad (join)
+import Control.Applicative ((<|>))
 
 type Indentation = Int
 
@@ -64,10 +65,19 @@ parseCategory = do
   return ReleaseCategory { _categoryTitle = catTitle, _categoryReleaseNotes = rns }
 
 parsePullRequestBody :: Parser (Seq ReleaseNote)
-parsePullRequestBody = do
+parsePullRequestBody = parsePullRequestBodyTemplate <|> parsePullRequestBodyDependabot
+
+parsePullRequestBodyTemplate :: Parser (Seq ReleaseNote)
+parsePullRequestBodyTemplate = do
   _ <- anyChar `manyTill` (skipSpace >> string "## Custom Release-Notes")
   _ <- skipSpace
   fromList <$> manyTill parseReleaseNote (skipSpace >> string "<!-- end-of-pr-marker -->")
+
+parsePullRequestBodyDependabot :: Parser (Seq ReleaseNote)
+parsePullRequestBodyDependabot = do
+  _ <- anyChar `manyTill` (skipSpace >> string "`@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)")
+  _ <- skipSpace >> string "</details>" >> skipSpace
+  return mempty
 
 parseReleaseNote :: Parser ReleaseNote
 parseReleaseNote = do
