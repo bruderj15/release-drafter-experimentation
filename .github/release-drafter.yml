@@ -1,24 +1,28 @@
-name-template: 'v$NEXT_PATCH_VERSION 🌟'
-tag-template: 'v$NEXT_PATCH_VERSION'
+name-template: "v$NEXT_PATCH_VERSION 🌟"
+tag-template: "v$NEXT_PATCH_VERSION"
 
 categories:
-  - title: '🚀 Features'
+  - title: "🚀 Features"
     labels:
-      - 'feature'
+      - "feature"
 
-  - title: '🐛 Bug Fixes'
+  - title: "🐛 Bug Fixes"
     labels:
-      - 'fix'
+      - "fix"
 
-  - title: '🔒 Dependencies'
+  - title: "🛠 Maintenance"
     labels:
-      - 'dependencies'
+      - "chore"
+
+  - title: "🔒 Dependencies"
+    labels:
+      - "dependencies"
 
 change-template: |
   - $TITLE @$AUTHOR (#$NUMBER)
     $BODY
 
-no-changes-template: '- No user-facing changes in this release.'
+no-changes-template: "- No user-facing changes in this release."
 
 template: |
   ## 📦 Release Notes
