@@ -1,5 +1,3 @@
-{-# OPTIONS_GHC -fdefer-typed-holes #-}
-
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell #-}
 
@@ -31,21 +29,24 @@ data ReleaseCategory = ReleaseCategory
   } deriving (Show, Eq)
 $(makeLenses ''ReleaseCategory)
 
-data ReleaseBody = ReleaseBody
-  { _features     :: Seq ReleaseNote
-  , _fixes        :: Seq ReleaseNote
-  , _maintenance  :: Seq ReleaseNote
-  , _dependencies :: Seq ReleaseNote
-  , _footer       :: Text
+data Release = Release
+  { _categories :: Seq ReleaseCategory
+  , _footer     :: Text
   } deriving (Show, Eq)
-$(makeLenses ''ReleaseBody)
+$(makeLenses ''Release)
 
 main :: IO ()
 main = do
   input <- getContents
-  case parseOnly parseCategories input of
+  case parseOnly parseRelease input of
     Left err -> print err
     Right res -> print res
+
+parseRelease :: Parser Release
+parseRelease = do
+  cats <- parseCategories
+  remainder <- takeText
+  return Release { _categories = cats, _footer = remainder }
 
 parseCategories :: Parser (Seq ReleaseCategory)
 parseCategories = fromList <$> many' parseCategory
@@ -86,9 +87,3 @@ parseReleaseNote = do
   title <- takeTill isEndOfLine
   _ <- endOfLine
   return $ ReleaseNote { _note = title, _indentation = indent }
-
-parseDependencies :: Parser (Seq ReleaseNote)
-parseDependencies = _
-
-parseFooter :: Parser Text
-parseFooter = _
