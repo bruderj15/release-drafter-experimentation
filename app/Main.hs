@@ -13,6 +13,8 @@ import Control.Monad (join)
 import Control.Applicative ((<|>))
 import GHC.IsList (toList)
 
+-------------- Type --------------
+
 type Indentation = Int
 
 data ReleaseNote = ReleaseNote
@@ -35,6 +37,8 @@ data Release = Release
   , _footer     :: Text
   } deriving (Show, Eq)
 $(makeLenses ''Release)
+
+-------------- Parser --------------
 
 parseRelease :: Parser Release
 parseRelease = do
@@ -82,6 +86,8 @@ parseReleaseNote = do
   _ <- endOfLine
   return $ ReleaseNote { _note = title, _indentation = indent }
 
+-------------- Formatter --------------
+
 formatRelease :: Release -> Text
 formatRelease r =
   let cats = formatCategory <$> r^.categories
@@ -92,10 +98,12 @@ formatCategory :: ReleaseCategory -> Text
 formatCategory cat =
   let notes = formatReleaseNote <$> cat^.categoryReleaseNotes
       renderedNotes = intercalate "\n" $ GHC.IsList.toList notes
-   in cat^.categoryTitle <> "\n\n" <> renderedNotes
+   in "## " <> cat^.categoryTitle <> "\n\n" <> renderedNotes
 
 formatReleaseNote :: ReleaseNote -> Text
 formatReleaseNote rn = Data.Text.replicate (rn^.indentation) " " <> "- " <> rn^.note
+
+-------------- Main --------------
 
 main :: IO ()
 main = do
