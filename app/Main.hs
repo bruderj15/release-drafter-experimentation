@@ -28,10 +28,10 @@ data ReleaseCategory = ReleaseCategory
   { _categoryTitle        :: Text
   , _categoryReleaseNotes :: Seq ReleaseNote
   } deriving (Show, Eq)
+$(makeLenses ''ReleaseCategory)
 
 data ReleaseBody = ReleaseBody
-  { _header       :: Text
-  , _features     :: Seq ReleaseNote
+  { _features     :: Seq ReleaseNote
   , _fixes        :: Seq ReleaseNote
   , _maintenance  :: Seq ReleaseNote
   , _dependencies :: Seq ReleaseNote
@@ -45,9 +45,6 @@ main = do
   case parseOnly parseCategories input of
     Left err -> print err
     Right res -> print res
-
-parseHeader :: Parser Text
-parseHeader = _
 
 parseCategories :: Parser (Seq ReleaseCategory)
 parseCategories = fromList <$> many' parseCategory
