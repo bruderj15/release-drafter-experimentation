@@ -30,3 +30,16 @@ template: |
   $CHANGES
 
   **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...$TAG
+
+autolabeler:
+  - label: "feature"
+    branch:
+      - "/^feat[/-]/"
+
+  - label: "fix"
+    branch:
+      - "/^fix[/-]/"
+
+  - label: "chore"
+    branch:
+      - "/^chore[/-]/"
