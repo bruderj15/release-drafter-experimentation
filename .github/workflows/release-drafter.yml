@@ -52,7 +52,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Haskell
-        uses: haskell/actions/setup@v2
+        uses: haskell-actions/setup@v2
         with:
           ghc-version: "9.10.1"
           cabal-version: "3.14.2.0"
@@ -63,9 +63,24 @@ jobs:
           cabal build exe:release-notes-postprocessor
           cp $(cabal list-bin exe:release-notes-postprocessor) ./release-notes-postprocessor
 
-      - name: Save current release notes
-        run: |
-          echo "${{ github.event.release.body }}" > original.md
+      - name: Fetch latest draft release notes
+        id: fetch_release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const releases = await github.rest.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
+
+            const draft = releases.data.find(r => r.draft);
+            if (!draft) {
+              throw new Error("No draft release found.");
+            }
+
+            const fs = require('fs');
+            fs.writeFileSync('original.md', draft.body || '');
+            core.setOutput('release_id', draft.id);
 
       - name: Run postprocessor
         run: |
