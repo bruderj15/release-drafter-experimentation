@@ -42,12 +42,15 @@ $(makeLenses ''ReleaseBody)
 main :: IO ()
 main = do
   input <- getContents
-  case parseOnly parseCategory input of
+  case parseOnly parseCategories input of
     Left err -> print err
     Right res -> print res
 
 parseHeader :: Parser Text
 parseHeader = _
+
+parseCategories :: Parser (Seq ReleaseCategory)
+parseCategories = fromList <$> many' parseCategory
 
 parseCategory :: Parser ReleaseCategory
 parseCategory = do

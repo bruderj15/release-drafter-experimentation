@@ -1,4 +1,4 @@
-## Features
+## 🚀 Features
 
 - BAO TITLE @bruderj15 (#5)
 <!-- if needed please write above the given line -->
