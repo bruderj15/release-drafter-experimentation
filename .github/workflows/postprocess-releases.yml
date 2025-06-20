@@ -4,8 +4,12 @@ on:
   release:
     types: [created, edited]
 
+permissions:
+  contents: write
+
 jobs:
   postprocess:
+    if: ${{ github.event.release.draft }}
     runs-on: ubuntu-latest
 
     steps:
@@ -21,8 +25,8 @@ jobs:
       - name: Build Haskell tool
         run: |
           cabal update
-          cabal build exe:release-postprocessor
-          cp $(cabal list-bin exe:release-postprocessor) ./release-postprocessor
+          cabal build exe:release-notes-postprocessor
+          cp $(cabal list-bin exe:release-notes-postprocessor) ./release-notes-postprocessor
 
       - name: Save current release notes
         run: |
@@ -30,7 +34,7 @@ jobs:
 
       - name: Run postprocessor
         run: |
-          ./release-postprocessor < original.md > processed.md
+          ./release-notes-postprocessor < original.md > processed.md
 
       - name: Update release with processed notes
         uses: actions/github-script@v7

@@ -14,7 +14,7 @@ build-type: Simple
 common warnings
   ghc-options: -Wall
 
-executable release-drafter-experimentation
+executable release-notes-postprocessor
   import: warnings
   main-is: Main.hs
   build-depends:
